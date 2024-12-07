@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import './globals.css';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -24,12 +25,12 @@ export default function Home() {
         <p className='text-lg text-gray-600 mt-4'>
           Aqui será a plataforma para gestão e exibição de veículos.
         </p>
-        <a
-          href='#'
+        <Link
+          href='/auth/entrar'
           className='mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700'
         >
           Entrar
-        </a>
+        </Link>
       </main>
 
       <footer className='w-full bg-gray-800 text-white py-4'>
