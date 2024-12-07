@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Variável de ambiente para conexão com o banco
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Tabela: Empresas
+model Empresa {
+  uuid      String   @id @default(uuid())
+  ativo     Boolean  @default(true)
+  email     String   @unique
+  password  String
+  nome      String
+  telefone  String?
+  dominio   String   @unique
+  Veiculos  Veiculo[]
+}
+
+// Tabela: Veículos
+model Veiculo {
+  uuid         String    @id @default(uuid())
+  ativo        Boolean   @default(true)
+  marca        String
+  modelo       String
+  ano          String
+  preco        Float
+  slug         String    @unique
+  observacoes  String?
+  empresaUuid  String
+  Empresa      Empresa   @relation(fields: [empresaUuid], references: [uuid])
+  Imagens      Imagem[]
+}
+
+// Tabela: Imagens
+model Imagem {
+  uuid         String   @id @default(uuid())
+  veiculoUuid  String
+  imagemUrl    String
+  thumbUrl     String?
+  principal    Boolean  @default(false)
+  Veiculo      Veiculo  @relation(fields: [veiculoUuid], references: [uuid])
+}
