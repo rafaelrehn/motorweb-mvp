@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import './globals.css';
+
 export default function Home() {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gray-100'>
@@ -11,7 +13,7 @@ export default function Home() {
       <header className='w-full bg-blue-600 text-white py-4 shadow-md'>
         <div className='max-w-4xl mx-auto text-center'>
           <h1 className='text-2xl font-bold'>Motorweb</h1>
-          <p className='text-sm'>Seu sistema para revendas de veículos</p>
+          <p className='text-sm'>Seu website para anúncios de veículos</p>
         </div>
       </header>
 
@@ -26,7 +28,7 @@ export default function Home() {
           href='#'
           className='mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700'
         >
-          Saiba Mais
+          Entrar
         </a>
       </main>
 
