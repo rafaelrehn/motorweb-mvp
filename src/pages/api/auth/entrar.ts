@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../lib/prisma';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+const SECRET_KEY = process.env.JWT_SECRET_KEY as string;
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,9 +36,20 @@ const handleLogin = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(401).json({ message: 'Email ou senha inválidos' });
     }
 
+    const token = jwt.sign(
+      {
+        uuid: empresa.uuid,
+        email: empresa.email,
+        nome: empresa.nome,
+      },
+      SECRET_KEY,
+      { expiresIn: '7d' }
+    );
+
     return res.status(200).json({
       message: 'Login bem-sucedido',
       empresa,
+      token,
     });
   } catch (error) {
     console.error('Erro ao fazer login:', error);

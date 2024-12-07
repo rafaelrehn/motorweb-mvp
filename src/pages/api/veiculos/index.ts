@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../lib/prisma';
+import { validateToken } from '@/middleware/auth';
 
-const EMPRESA_UUID = 'e3a626ec-fd05-4cd6-9610-196a7e228e2b';
-
-const handleGet = async (res: NextApiResponse) => {
+const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const veiculos = await prisma.veiculo.findMany({
-      where: { empresaUuid: EMPRESA_UUID },
+      where: { empresaUuid: req.empresa.uuid },
     });
     if (!veiculos || veiculos.length === 0) {
       return res.status(404).json({ message: 'Nenhum veículo encontrado' });
@@ -28,7 +27,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
         ano,
         preco,
         observacoes,
-        empresaUuid: EMPRESA_UUID,
+        empresaUuid: req.empresa.uuid,
         slug: `${marca}-${modelo}-${preco}`,
       },
     });
@@ -43,8 +42,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await new Promise((resolve, reject) => {
+    validateToken(req, res, (result: any) =>
+      result instanceof Error ? reject(result) : resolve(result)
+    );
+  });
+
   if (req.method === 'GET') {
-    return handleGet(res);
+    return handleGet(req, res);
   }
 
   if (req.method === 'POST') {

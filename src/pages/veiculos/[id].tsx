@@ -52,7 +52,10 @@ export default function VeiculoForm() {
     try {
       const response = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: String(localStorage.getItem('token')),
+        },
         body: JSON.stringify(veiculo),
       });
       if (response.ok) {

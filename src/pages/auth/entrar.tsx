@@ -26,7 +26,7 @@ export default function Entrar() {
         const data = await response.json();
         const { empresa, token } = data;
         localStorage.setItem('empresa', JSON.stringify(empresa));
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', String('Bearer ' + token));
         setMessage('Login bem-sucedido! Redirecionando...');
         setTimeout(() => router.push('/dashboard'), 2000);
       } else {

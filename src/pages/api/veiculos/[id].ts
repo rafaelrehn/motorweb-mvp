@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../lib/prisma';
+import { validateToken } from '@/middleware/auth';
 
 const handleGet = async (id: string, res: NextApiResponse) => {
   try {
@@ -46,6 +47,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await new Promise((resolve, reject) => {
+    validateToken(req, res, (result: any) =>
+      result instanceof Error ? reject(result) : resolve(result)
+    );
+  });
+
   const { id } = req.query;
   const method = req.method;
 

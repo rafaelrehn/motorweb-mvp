@@ -20,7 +20,12 @@ export default function VeiculosList() {
   useEffect(() => {
     async function fetchVeiculos() {
       try {
-        const response = await fetch('/api/veiculos');
+        const response = await fetch('/api/veiculos', {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: String(localStorage.getItem('token')),
+          },
+        });
         if (response.ok) {
           const data = await response.json();
           setVeiculos(data);
