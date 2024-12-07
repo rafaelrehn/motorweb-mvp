@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
-type Veiculo = {
-  uuid?: string;
-  marca: string;
-  modelo: string;
-  ano: string;
-  preco: number;
-  observacoes?: string;
-};
+import { Veiculo } from '@/model/veiculo.type';
 
 export default function VeiculoForm() {
   const router = useRouter();

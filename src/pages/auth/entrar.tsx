@@ -23,6 +23,10 @@ export default function Entrar() {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const { empresa, token } = data;
+        localStorage.setItem('empresa', JSON.stringify(empresa));
+        localStorage.setItem('token', token);
         setMessage('Login bem-sucedido! Redirecionando...');
         setTimeout(() => router.push('/dashboard'), 2000);
       } else {

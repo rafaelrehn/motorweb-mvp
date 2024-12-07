@@ -26,7 +26,6 @@ const handleLogin = async (req: NextApiRequest, res: NextApiResponse) => {
     const empresa = await prisma.empresa.findUnique({
       where: { email: String(email) },
     });
-    console.log('empresa:::', empresa);
     if (
       !empresa ||
       !(await bcrypt.compare(String(password), empresa.password))
@@ -36,7 +35,7 @@ const handleLogin = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({
       message: 'Login bem-sucedido',
-      empresa: { id: empresa.uuid, nome: empresa.nome },
+      empresa,
     });
   } catch (error) {
     console.error('Erro ao fazer login:', error);
