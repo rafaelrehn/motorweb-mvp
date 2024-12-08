@@ -65,11 +65,11 @@ export default function VeiculosList() {
   if (loading) return <p>Carregando veículos...</p>;
 
   return (
-    <div className='max-w-6xl mx-auto mt-10'>
+    <div className='max-w-6xl mx-auto'>
       <div className='flex justify-between items-center mb-6'>
         <h1 className='text-2xl font-bold'>Lista de Veículos</h1>
         <Link
-          href='/veiculos/new'
+          href='/admin/veiculos/new'
           className='bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700'
         >
           + Novo Veículo
@@ -114,7 +114,7 @@ export default function VeiculosList() {
                 </td>
                 <td className='border border-gray-300 px-4 py-2 text-center'>
                   <Link
-                    href={`/veiculos/${veiculo.uuid}`}
+                    href={`/admin/veiculos/${veiculo.uuid}`}
                     className='bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 mr-2'
                   >
                     Editar

@@ -30,22 +30,28 @@ export default function Header() {
         <div className='flex flex-col md:flex-row items-center space-x-4'>
           <h1
             className='text-lg font-bold cursor-pointer'
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push('/admin/dashboard')}
           >
-            Meu Sistema
+            Admin
           </h1>
           <nav className='flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4'>
             <button
-              onClick={() => router.push('/dashboard')}
+              onClick={() => router.push('/admin/dashboard')}
               className='hover:underline'
             >
               Dashboard
             </button>
             <button
-              onClick={() => router.push('/veiculos')}
+              onClick={() => router.push('/admin/veiculos')}
               className='hover:underline'
             >
               Veículos
+            </button>
+            <button
+              onClick={() => router.push('/admin/configuracoes')}
+              className='hover:underline'
+            >
+              Configurações
             </button>
           </nav>
         </div>
