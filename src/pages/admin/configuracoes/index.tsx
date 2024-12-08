@@ -21,7 +21,7 @@ export default function EditPage() {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            authorization: localStorage.getItem('token'),
+            authorization: localStorage.getItem('token') || '',
           },
         });
 
@@ -56,7 +56,7 @@ export default function EditPage() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          authorization: localStorage.getItem('token'),
+          authorization: localStorage.getItem('token') || '',
         },
         body: JSON.stringify(formData),
       });

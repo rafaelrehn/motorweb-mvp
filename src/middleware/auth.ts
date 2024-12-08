@@ -6,6 +6,7 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY as string;
 export const validateToken = async (
   req: NextApiRequest,
   res: NextApiResponse,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   next: Function
 ) => {
   const authHeader = req.headers.authorization;
@@ -18,7 +19,8 @@ export const validateToken = async (
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.empresa = decoded;
+    // req.empresa = decoded;
+    Object.assign(req, { empresa: decoded });
     return next();
   } catch (error) {
     return res

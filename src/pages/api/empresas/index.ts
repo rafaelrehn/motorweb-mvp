@@ -51,7 +51,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   await new Promise((resolve, reject) => {
-    validateToken(req, res, (result: any) =>
+    validateToken(req, res, (result: unknown) =>
       result instanceof Error ? reject(result) : resolve(result)
     );
   });

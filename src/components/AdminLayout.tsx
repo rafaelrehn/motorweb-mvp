@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 
-const AdminLayout = ({ children }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AdminLayout = ({ children }: any) => {
   return (
     <>
       <Header />

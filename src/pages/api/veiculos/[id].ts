@@ -17,6 +17,7 @@ const handleGet = async (id: string, res: NextApiResponse) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handlePut = async (id: string, body: any, res: NextApiResponse) => {
   try {
     const { marca, modelo, ano, preco, observacoes } = body;
@@ -48,7 +49,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   await new Promise((resolve, reject) => {
-    validateToken(req, res, (result: any) =>
+    validateToken(req, res, (result: unknown) =>
       result instanceof Error ? reject(result) : resolve(result)
     );
   });
@@ -60,6 +61,7 @@ export default async function handler(
     return res.status(400).json({ message: 'ID inválido ou não fornecido' });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   const methods: { [key: string]: Function } = {
     GET: () => handleGet(id, res),
     PUT: () => handlePut(id, req.body, res),

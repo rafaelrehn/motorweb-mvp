@@ -1,6 +1,6 @@
 export type Veiculo = {
   uuid?: string;
-  empresaUuid: string;
+  empresaUuid?: string;
   marca: string;
   modelo: string;
   ano: string;
